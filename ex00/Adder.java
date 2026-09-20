@@ -1,0 +1,11 @@
+package ex00;
+
+public class Adder {
+
+    private Adder() {
+    }
+
+    public static int adder(int a, int b) {
+        return b == 0 ? a : adder(a ^ b, (a & b) << 1);
+    }
+}
