@@ -1,4 +1,4 @@
-package ex00;
+package fr._42.adder.logic;
 
 public class Adder {
 
