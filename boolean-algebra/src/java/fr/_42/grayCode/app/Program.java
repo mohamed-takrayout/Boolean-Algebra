@@ -1,6 +1,6 @@
-package fr._42.gray.app;
+package fr._42.grayCode.app;
 
-import fr._42.gray.logic.GrayCode;
+import fr._42.grayCode.logic.GrayCode;
 
 public class Program {
 

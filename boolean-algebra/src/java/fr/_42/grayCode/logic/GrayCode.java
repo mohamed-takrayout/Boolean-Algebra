@@ -1,4 +1,4 @@
-package fr._42.gray.logic;
+package fr._42.grayCode.logic;
 
 public class GrayCode {
 
