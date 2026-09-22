@@ -46,6 +46,9 @@ public class EvalFormula {
                 if (LINKED_LIST_OPERATIONS.size() < 2 & c != '!') {
                     throw new IllegalArgumentException("Entered non valid sequence of operations : [" + str + "]");
                 }
+                if (c == '!' & LINKED_LIST_OPERATIONS.size() < 1) {
+                    throw new IllegalArgumentException("Entered non valid sequence of operations : [" + str + "]");
+                }
                 first = LINKED_LIST_OPERATIONS.remove();
                 if (c == '!') {
                     LINKED_LIST_OPERATIONS.addFirst(!first);
