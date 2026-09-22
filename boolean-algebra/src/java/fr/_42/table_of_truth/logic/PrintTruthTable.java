@@ -1,13 +1,14 @@
 package fr._42.table_of_truth.logic;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Map;
+import java.util.Stack;
 import java.util.function.IntBinaryOperator;
 
 public class PrintTruthTable {
 
-    private static ArrayList<Character> symbolCharacters = new ArrayList<>();
+    private static final ArrayList<Character> symbolCharacters = new ArrayList<>();
+    private static char[][] truthTable;
     private static String formula;
 
     private PrintTruthTable() {
@@ -18,7 +19,7 @@ public class PrintTruthTable {
             '&', (a, b) -> a & b,
             '|', (a, b) -> a | b,
             '^', (a, b) -> a ^ b,
-            '>', (a, b) -> a == b ? 1 : 0,
+            '>', (a, b) -> (a == 0 || b == 1) ? 1 : 0,
             '=', (a, b) -> a == b ? 1 : 0
     );
 
@@ -49,40 +50,37 @@ public class PrintTruthTable {
     }
 
     private static boolean evalFormula(String str) throws IllegalArgumentException {
-        LinkedList<Boolean> LINKED_LIST_OPERATIONS = new LinkedList<>();
-        boolean first;
-        boolean second;
+        Stack<Boolean> STACK_OPERATIONS = new Stack<>();
+        boolean right;
+        boolean left;
         for (char c : str.toCharArray()) {
-            if (isOperator(c)) {
-                if (LINKED_LIST_OPERATIONS.size() < 2 & c != '!') {
-                    throw new IllegalArgumentException("Entered non valid sequence of operations : [" + str + "]");
-                }
-                if (c == '!' & LINKED_LIST_OPERATIONS.size() < 1) {
-                    throw new IllegalArgumentException("Entered non valid sequence of operations : [" + str + "]");
-                }
-                first = LINKED_LIST_OPERATIONS.remove();
-                if (c == '!') {
-                    LINKED_LIST_OPERATIONS.addFirst(!first);
-                    continue;
-                }
-                second = LINKED_LIST_OPERATIONS.remove();
-                int newValue = OPERATORS.get(c).applyAsInt(first ? 1 : 0, second ? 1 : 0);
-                LINKED_LIST_OPERATIONS.addFirst(newValue == 1);
-            } else {
-                if (c == '1') {
-                    LINKED_LIST_OPERATIONS.addLast(true);
-                } else if (c == '0') {
-                    LINKED_LIST_OPERATIONS.addLast(false);
+            if (!isOperator(c)) {
+                if (c == '1' || c == '0') {
+                    STACK_OPERATIONS.addLast(c == '1');
                 } else {
                     throw new IllegalArgumentException("Entered non valid sequence of operations : [" + str + "]");
                 }
+                continue;
+            }
+            if (c == '!') {
+                if (STACK_OPERATIONS.size() < 1) {
+                    throw new IllegalArgumentException("Entered non valid sequence of operations : [" + str + "]");
+                }
+                STACK_OPERATIONS.push(!STACK_OPERATIONS.pop());
+            } else {
+                if (STACK_OPERATIONS.size() < 2) {
+                    throw new IllegalArgumentException("Entered non valid sequence of operations : [" + str + "]");
+                }
+                right = STACK_OPERATIONS.pop();
+                left = STACK_OPERATIONS.pop();
+                int newValue = OPERATORS.get(c).applyAsInt(left ? 1 : 0, right ? 1 : 0);
+                STACK_OPERATIONS.push(newValue == 1);
             }
         }
-        if (LINKED_LIST_OPERATIONS.size() != 1) {
+        if (STACK_OPERATIONS.size() != 1) {
             throw new IllegalArgumentException("Entered non valid sequence of operations : [" + str + "]");
         }
-        return LINKED_LIST_OPERATIONS.remove();
-
+        return STACK_OPERATIONS.pop();
     }
 
     private static int pow(int a, int power) {
@@ -97,7 +95,7 @@ public class PrintTruthTable {
         return result;
     }
 
-    private static void fillTruthTable(char[][] truthTable) {
+    private static void fillTruthTable() throws IllegalArgumentException {
         int variableCount = truthTable[0].length - 1;
         int rowCount = truthTable.length - 1;
         for (int column = 0; column < variableCount; column++) {
@@ -141,7 +139,7 @@ public class PrintTruthTable {
 
     public static void printTruthTable(String str) {
         StringBuilder sb = new StringBuilder();
-        char[][] truthTable;
+
         symbolCharacters.clear();
         formula = str;
         for (char c : str.toCharArray()) {
@@ -161,11 +159,11 @@ public class PrintTruthTable {
         try {
             evalFormula(sb.toString());
             truthTable = new char[pow(2, symbolCharacters.size()) + 1][symbolCharacters.size() + 1];
-            symbolCharacters.add('=');
-            for (int i = 0; i < truthTable[0].length; i++) {
+            for (int i = 0; i < truthTable[0].length - 1; i++) {
                 truthTable[0][i] = symbolCharacters.get(i);
             }
-            fillTruthTable(truthTable);
+            truthTable[0][truthTable[0].length - 1] = '=';
+            fillTruthTable();
             printMatrix(truthTable);
 
         } catch (IllegalArgumentException e) {

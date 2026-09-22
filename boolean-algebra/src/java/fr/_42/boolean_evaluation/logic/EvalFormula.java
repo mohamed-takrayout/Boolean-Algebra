@@ -1,7 +1,7 @@
 package fr._42.boolean_evaluation.logic;
 
-import java.util.LinkedList;
 import java.util.Map;
+import java.util.Stack;
 import java.util.function.IntBinaryOperator;
 
 public class EvalFormula {
@@ -11,7 +11,7 @@ public class EvalFormula {
             '&', (a, b) -> a & b,
             '|', (a, b) -> a | b,
             '^', (a, b) -> a ^ b,
-            '>', (a, b) -> a == b ? 1 : 0,
+            '>', (a, b) -> (a == 0 || b == 1) ? 1 : 0,
             '=', (a, b) -> a == b ? 1 : 0
     );
 
@@ -38,39 +38,37 @@ public class EvalFormula {
     }
 
     public static boolean evalFormula(String str) throws IllegalArgumentException {
-        LinkedList<Boolean> LINKED_LIST_OPERATIONS = new LinkedList<>();
-        boolean first;
-        boolean second;
+        Stack<Boolean> STACK_OPERATIONS = new Stack<>();
+        boolean right;
+        boolean left;
         for (char c : str.toCharArray()) {
-            if (isOperator(c)) {
-                if (LINKED_LIST_OPERATIONS.size() < 2 & c != '!') {
-                    throw new IllegalArgumentException("Entered non valid sequence of operations : [" + str + "]");
-                }
-                if (c == '!' & LINKED_LIST_OPERATIONS.size() < 1) {
-                    throw new IllegalArgumentException("Entered non valid sequence of operations : [" + str + "]");
-                }
-                first = LINKED_LIST_OPERATIONS.remove();
-                if (c == '!') {
-                    LINKED_LIST_OPERATIONS.addFirst(!first);
-                    continue;
-                }
-                second = LINKED_LIST_OPERATIONS.remove();
-                int newValue = OPERATORS.get(c).applyAsInt(first ? 1 : 0, second ? 1 : 0);
-                LINKED_LIST_OPERATIONS.addFirst(newValue == 1);
-            } else {
-                if (c == '1') {
-                    LINKED_LIST_OPERATIONS.addLast(true);
-                } else if (c == '0') {
-                    LINKED_LIST_OPERATIONS.addLast(false);
+            if (!isOperator(c)) {
+                if (c == '1' || c == '0') {
+                    STACK_OPERATIONS.addLast(c == '1');
                 } else {
                     throw new IllegalArgumentException("Entered non valid sequence of operations : [" + str + "]");
                 }
+                continue;
+            }
+            if (c == '!') {
+                if (STACK_OPERATIONS.size() < 1) {
+                    throw new IllegalArgumentException("Entered non valid sequence of operations : [" + str + "]");
+                }
+                STACK_OPERATIONS.push(!STACK_OPERATIONS.pop());
+
+            } else {
+                if (STACK_OPERATIONS.size() < 2) {
+                    throw new IllegalArgumentException("Entered non valid sequence of operations : [" + str + "]");
+                }
+                right = STACK_OPERATIONS.pop();
+                left = STACK_OPERATIONS.pop();
+                int newValue = OPERATORS.get(c).applyAsInt(left ? 1 : 0, right ? 1 : 0);
+                STACK_OPERATIONS.push(newValue == 1);
             }
         }
-        if (LINKED_LIST_OPERATIONS.size() != 1) {
+        if (STACK_OPERATIONS.size() != 1) {
             throw new IllegalArgumentException("Entered non valid sequence of operations : [" + str + "]");
         }
-        return LINKED_LIST_OPERATIONS.remove();
-
+        return STACK_OPERATIONS.pop();
     }
 }

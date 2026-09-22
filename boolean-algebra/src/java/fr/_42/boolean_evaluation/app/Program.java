@@ -20,6 +20,8 @@ public class Program {
         printEvalFormula("10|1&");
         printEvalFormula("101|&");
         printEvalFormula("11>");
+        printEvalFormula("10>");
+        printEvalFormula("10=");
         printEvalFormula("11>>");
         printEvalFormula("1011||=");
     }
