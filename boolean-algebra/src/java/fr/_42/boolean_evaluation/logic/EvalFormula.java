@@ -43,7 +43,7 @@ public class EvalFormula {
         boolean second;
         for (char c : str.toCharArray()) {
             if (isOperator(c)) {
-                if (LINKED_LIST_OPERATIONS.size() < 2 && c != '!') {
+                if (LINKED_LIST_OPERATIONS.size() < 2 & c != '!') {
                     throw new IllegalArgumentException("Entered non valid sequence of operations : [" + str + "]");
                 }
                 first = LINKED_LIST_OPERATIONS.remove();
