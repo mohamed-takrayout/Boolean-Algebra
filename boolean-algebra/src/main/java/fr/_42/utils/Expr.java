@@ -5,6 +5,7 @@ public final class Expr {
     public final char variable;
     public final Expr left;
     public final Expr right;
+    public boolean variableNegated = false;
 
     public Expr(char variable) {
         this.op = '\0';
