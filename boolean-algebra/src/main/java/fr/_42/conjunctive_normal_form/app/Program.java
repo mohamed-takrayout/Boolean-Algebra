@@ -5,7 +5,7 @@ import fr._42.conjunctive_normal_form.logic.ConjunctiveNormalForm;
 public class Program {
 
     public static void main(String[] args) {
-        String[][] tests = {
+        String[][] TESTS = {
             {"A!B!|", "A!B!|"},
             {"A!B!&", "A!B!&"},
             {"AB|C&", "AB|C&"},
@@ -13,7 +13,7 @@ public class Program {
             {"AB|C|D|", "ABCD|||"},
             {"AB&C&D&", "ABCD&&&"}
         };
-        for (String[] test : tests) {
+        for (String[] test : TESTS) {
             String input = test[0];
             String expected = test[1];
             String output = ConjunctiveNormalForm.conjunctive_normal_form(input);

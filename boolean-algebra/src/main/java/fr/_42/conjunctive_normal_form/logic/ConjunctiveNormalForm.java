@@ -9,6 +9,25 @@ import java.util.List;
 
 public class ConjunctiveNormalForm {
 
+    public static String conjunctive_normal_form(String formula) {
+        String formulAsNNF = NegationNormalForm.negation_normal_form(formula);
+        Expr root = parseNnfRpn(formulAsNNF);
+        List<List<String>> clauses = toCnfClauses(root);
+        StringBuilder result = new StringBuilder();
+        for (List<String> clause : clauses) {
+            for (int i = 0; i < clause.size(); i++) {
+                result.append(clause.get(i));
+            }
+            for (int i = 1; i < clause.size(); i++) {
+                result.append('|');
+            }
+        }
+        for (int i = 1; i < clauses.size(); i++) {
+            result.append('&');
+        }
+        return result.toString();
+    }
+
     private static Expr parseNnfRpn(String formula) {
         Deque<Expr> stack = new ArrayDeque<>();
         for (char token : formula.toCharArray()) {
@@ -71,25 +90,5 @@ public class ConjunctiveNormalForm {
         List<List<String>> clauses = new ArrayList<>();
         clauses.add(clause);
         return clauses;
-    }
-
-    public static String conjunctive_normal_form(String formula) {
-        String formulAsNNF = NegationNormalForm.negation_normal_form(formula);
-        Expr root = parseNnfRpn(formulAsNNF);
-        List<List<String>> clauses = toCnfClauses(root);
-        StringBuilder result = new StringBuilder();
-        // Write each clause as an RPN OR expression.
-        for (List<String> clause : clauses) {
-            for (int i = 0; i < clause.size(); i++) {
-                result.append(clause.get(i));
-            }
-            for (int i = 1; i < clause.size(); i++) {
-                result.append('|');
-            }
-        }
-        for (int i = 1; i < clauses.size(); i++) {
-            result.append('&');
-        }
-        return result.toString();
     }
 }
