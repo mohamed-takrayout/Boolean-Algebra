@@ -28,7 +28,7 @@ public class ConjunctiveNormalForm {
         return result.toString();
     }
 
-    private static Expr parseNnfRpn(String formula) {
+    public static Expr parseNnfRpn(String formula) {
         Deque<Expr> stack = new ArrayDeque<>();
         for (char token : formula.toCharArray()) {
             if (Character.isWhitespace(token)) {

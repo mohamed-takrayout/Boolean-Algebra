@@ -1,9 +1,8 @@
 package fr._42.table_of_truth.logic;
 
+import fr._42.utils.Operators;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.Stack;
-import java.util.function.IntBinaryOperator;
 
 public class PrintTruthTable {
 
@@ -13,15 +12,6 @@ public class PrintTruthTable {
 
     private PrintTruthTable() {
     }
-
-    private final static Map<Character, IntBinaryOperator> OPERATORS = Map.of(
-            '!', (a, b) -> a == 1 ? 0 : 1,
-            '&', (a, b) -> a & b,
-            '|', (a, b) -> a | b,
-            '^', (a, b) -> a ^ b,
-            '>', (a, b) -> (a == 0 || b == 1) ? 1 : 0,
-            '=', (a, b) -> a == b ? 1 : 0
-    );
 
     private static boolean isOperator(char c) {
         return switch (c) {
@@ -73,7 +63,7 @@ public class PrintTruthTable {
                 }
                 right = STACK_OPERATIONS.pop();
                 left = STACK_OPERATIONS.pop();
-                int newValue = OPERATORS.get(c).applyAsInt(left ? 1 : 0, right ? 1 : 0);
+                int newValue = Operators.OPERATORS.get(c).applyAsInt(left ? 1 : 0, right ? 1 : 0);
                 STACK_OPERATIONS.push(newValue == 1);
             }
         }
