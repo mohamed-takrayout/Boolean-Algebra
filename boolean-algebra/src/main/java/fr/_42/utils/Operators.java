@@ -13,4 +13,23 @@ public final class Operators {
             '>', (a, b) -> (a == 0 || b == 1) ? 1 : 0,
             '=', (a, b) -> a == b ? 1 : 0
     );
+
+    public static boolean isOperator(char c) {
+        return switch (c) {
+            case '!' ->
+                true;
+            case '&' ->
+                true;
+            case '|' ->
+                true;
+            case '^' ->
+                true;
+            case '>' ->
+                true;
+            case '=' ->
+                true;
+            default ->
+                false;
+        };
+    }
 }

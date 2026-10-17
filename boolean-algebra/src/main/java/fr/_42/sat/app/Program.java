@@ -35,10 +35,11 @@ public class Program {
             System.out.print("input :" + input);
             System.out.print("  -> output: " + output);
             System.out.print("  -> expected: " + expected);
-            if(output.equals(expected))
-                System.out.println("  V");
-            else 
+            if (output.equals(expected)) {
+                System.out.println("  V"); 
+            }else {
                 System.out.println("  X");
+            }
         }
     }
 }
