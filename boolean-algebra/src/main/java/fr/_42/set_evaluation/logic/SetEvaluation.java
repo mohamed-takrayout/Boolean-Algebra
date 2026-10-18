@@ -1,13 +1,14 @@
 package fr._42.set_evaluation.logic;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import fr._42.conjunctive_normal_form.logic.ConjunctiveNormalForm;
 import fr._42.utils.Evaluate;
 import fr._42.utils.Expr;
 import fr._42.utils.RpnParser;
 import fr._42.utils.SetOperations;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class SetEvaluation {
 
@@ -27,7 +28,8 @@ public class SetEvaluation {
         Map<Character, List<Integer>> mapSets;
         mapSets = assignSetToVariables(formula, sets);
         List<Integer> universalSet = SetOperations.getUniversalSet(sets);
-        Expr exprTree = RpnParser.parseRpn(ConjunctiveNormalForm.conjunctive_normal_form(formula));
+        String formulaAsCNF = ConjunctiveNormalForm.conjunctive_normal_form(formula);
+        Expr exprTree = RpnParser.parseNnfRpn(formulaAsCNF);
         return Evaluate.evaluateSetTree(exprTree, mapSets, universalSet);
     }
 }

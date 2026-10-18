@@ -34,4 +34,34 @@ public final class RpnParser {
         }
         return stack.pop();
     }
+
+    public static Expr parseNnfRpn(String formula) {
+        Deque<Expr> stack = new ArrayDeque<>();
+        for (char token : formula.toCharArray()) {
+            if (Character.isWhitespace(token)) {
+                continue;
+            }
+            if (token >= 'A' && token <= 'Z') {
+                stack.push(Expr.variable(token));
+            } else if (token == '!') {
+                if (stack.isEmpty() || !stack.peek().isVariable()) {
+                    throw new IllegalArgumentException("In NNF, ! must follow a variable");
+                }
+                stack.peek().variableNegated = true;
+            } else if (token == '&' || token == '|') {
+                if (stack.size() < 2) {
+                    throw new IllegalArgumentException("Invalid RPN formula");
+                }
+                Expr right = stack.pop();
+                Expr left = stack.pop();
+                stack.push(Expr.binary(token, left, right));
+            } else {
+                throw new IllegalArgumentException("Unknown token: " + token);
+            }
+        }
+        if (stack.size() != 1) {
+            throw new IllegalArgumentException("Invalid RPN formula");
+        }
+        return stack.pop();
+    }
 }

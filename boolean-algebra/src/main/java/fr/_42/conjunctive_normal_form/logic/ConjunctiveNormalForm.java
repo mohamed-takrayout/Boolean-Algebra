@@ -1,17 +1,17 @@
 package fr._42.conjunctive_normal_form.logic;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import fr._42.negation_normal_form.logic.NegationNormalForm;
 import fr._42.utils.Expr;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.List;
+import fr._42.utils.RpnParser;
 
 public class ConjunctiveNormalForm {
 
     public static String conjunctive_normal_form(String formula) {
         String formulAsNNF = NegationNormalForm.negation_normal_form(formula);
-        Expr root = parseNnfRpn(formulAsNNF);
+        Expr root = RpnParser.parseNnfRpn(formulAsNNF);
         List<List<String>> clauses = toCnfClauses(root);
         StringBuilder result = new StringBuilder();
         for (List<String> clause : clauses) {
@@ -26,36 +26,6 @@ public class ConjunctiveNormalForm {
             result.append('&');
         }
         return result.toString();
-    }
-
-    public static Expr parseNnfRpn(String formula) {
-        Deque<Expr> stack = new ArrayDeque<>();
-        for (char token : formula.toCharArray()) {
-            if (Character.isWhitespace(token)) {
-                continue;
-            }
-            if (token >= 'A' && token <= 'Z') {
-                stack.push(Expr.variable(token));
-            } else if (token == '!') {
-                if (stack.isEmpty() || !stack.peek().isVariable()) {
-                    throw new IllegalArgumentException("In NNF, ! must follow a variable");
-                }
-                stack.peek().variableNegated = true;
-            } else if (token == '&' || token == '|') {
-                if (stack.size() < 2) {
-                    throw new IllegalArgumentException("Invalid RPN formula");
-                }
-                Expr right = stack.pop();
-                Expr left = stack.pop();
-                stack.push(Expr.binary(token, left, right));
-            } else {
-                throw new IllegalArgumentException("Unknown token: " + token);
-            }
-        }
-        if (stack.size() != 1) {
-            throw new IllegalArgumentException("Invalid RPN formula");
-        }
-        return stack.pop();
     }
 
     private static List<List<String>> toCnfClauses(Expr expr) {

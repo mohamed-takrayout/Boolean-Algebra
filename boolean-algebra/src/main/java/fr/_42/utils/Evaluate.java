@@ -33,14 +33,13 @@ public final class Evaluate {
         }
         List<Integer> left = evaluateSetTree(expr.left, setByVariable, universalSet);
         List<Integer> right = evaluateSetTree(expr.right, setByVariable, universalSet);
-        switch (expr.op) {
+        return switch (expr.op) {
             case '|' ->
                 SetOperations.union(left, right);
             case '&' ->
                 SetOperations.intersection(left, right);
             default ->
                 throw new IllegalArgumentException("Unkown operator[" + expr.op + "] , it should not be here !!!!");
-        }
-        return null;
+        };
     }
 }
