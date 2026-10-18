@@ -1,8 +1,8 @@
-package fr._42.test.utils;
+package fr._42.utils;
 
-import fr._42.utils.SetOperations;
 import java.util.List;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 public class SetOperationsTest {
@@ -68,7 +68,7 @@ public class SetOperationsTest {
     }
 
     @Test
-    public void complement_in_universe_with_only_one_sets(){
+    public void complement_in_universe_with_only_one_sets() {
         List<Integer> set1 = List.of(1, 2, 3, 4);
         List<Integer> universalSet = set1;
 
@@ -78,7 +78,7 @@ public class SetOperationsTest {
     }
 
     @Test
-    public void complement_in_universe_with_two_non_identical_sets(){
+    public void complement_in_universe_with_two_non_identical_sets() {
         List<Integer> set1 = List.of(1, 2, 3, 4);
         List<Integer> set2 = List.of(5, 6, 7, 8);
         List<Integer> universalSet = SetOperations.union(set1, set2);
@@ -89,7 +89,7 @@ public class SetOperationsTest {
     }
 
     @Test
-    public void complement_in_universe_with_some_identical_values(){
+    public void complement_in_universe_with_some_identical_values() {
         List<Integer> set1 = List.of(1, 2, 3, 4);
         List<Integer> set2 = List.of(3, 4, 7, 8);
         List<Integer> universalSet = SetOperations.union(set1, set2);
@@ -100,7 +100,7 @@ public class SetOperationsTest {
     }
 
     @Test
-    public void complement_of_void_set_in_non_void_univers(){
+    public void complement_of_void_set_in_non_void_univers() {
         List<Integer> set1 = List.of();
         List<Integer> set2 = List.of(3, 4, 5, 6);
         List<Integer> universalSet = SetOperations.union(set1, set2);
