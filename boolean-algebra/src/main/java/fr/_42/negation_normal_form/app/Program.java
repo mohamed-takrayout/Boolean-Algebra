@@ -6,7 +6,7 @@ public class Program{
     public static void main(String[] args) {
         if (args.length > 0) {
             for (String formula : args) {
-                System.out.println(NegationNormalForm.negation_normal_form(formula));
+                System.out.println(NegationNormalForm.negationNormalForm(formula));
             }
             return;
         }
@@ -21,7 +21,7 @@ public class Program{
         };
 
         for (String formula : examples) {
-            System.out.println(formula + " -> " + NegationNormalForm.negation_normal_form(formula));
+            System.out.println(formula + " -> " + NegationNormalForm.negationNormalForm(formula));
         }
     }
 }

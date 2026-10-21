@@ -13,23 +13,23 @@ import fr._42.utils.SetOperations;
 public class SetEvaluation {
 
     private static Map<Character, List<Integer>> assignSetToVariables(String formula, List<List<Integer>> sets) {
-        Map<Character, List<Integer>> mapSets = new HashMap<>();
+        Map<Character, List<Integer>> mapOfSets = new HashMap<>();
         int i = 0;
         for (char c : formula.toCharArray()) {
-            if ((c >= 'A' && c <= 'Z') && !mapSets.containsKey(c)) {
-                mapSets.put(c, sets.get(i));
+            if ((c >= 'A' && c <= 'Z') && !mapOfSets.containsKey(c)) {
+                mapOfSets.put(c, sets.get(i));
                 i++;
             }
         }
-        return mapSets;
+        return mapOfSets;
     }
 
-    public static List<Integer> eval_set(String formula, List<List<Integer>> sets) {
-        Map<Character, List<Integer>> mapSets;
-        mapSets = assignSetToVariables(formula, sets);
+    public static List<Integer> evaluateSet(String formula, List<List<Integer>> sets) {
+        Map<Character, List<Integer>> mapOfSets;
+        mapOfSets = assignSetToVariables(formula, sets);
         List<Integer> universalSet = SetOperations.getUniversalSet(sets);
-        String formulaAsCNF = ConjunctiveNormalForm.conjunctive_normal_form(formula);
+        String formulaAsCNF = ConjunctiveNormalForm.conjunctiveNormalForm(formula);
         Expr exprTree = RpnParser.parseNnfRpn(formulaAsCNF);
-        return Evaluate.evaluateSetTree(exprTree, mapSets, universalSet);
+        return Evaluate.evaluateSetTree(exprTree, mapOfSets, universalSet);
     }
 }

@@ -9,8 +9,8 @@ import fr._42.utils.RpnParser;
 
 public class ConjunctiveNormalForm {
 
-    public static String conjunctive_normal_form(String formula) {
-        String formulAsNNF = NegationNormalForm.negation_normal_form(formula);
+    public static String conjunctiveNormalForm(String formula) {
+        String formulAsNNF = NegationNormalForm.negationNormalForm(formula);
         Expr root = RpnParser.parseNnfRpn(formulAsNNF);
         List<List<String>> clauses = toCnfClauses(root);
         StringBuilder result = new StringBuilder();

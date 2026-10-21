@@ -16,8 +16,8 @@ public class Program {
         for (String[] test : TESTS) {
             String input = test[0];
             String expected = test[1];
-            String output = ConjunctiveNormalForm.conjunctive_normal_form(input);
-            System.out.println("input :" +input + "  -> output: " + output +"-> expected: "+ expected);
+            String output = ConjunctiveNormalForm.conjunctiveNormalForm(input);
+            System.out.println("input :" + input + "  -> output: " + output + "-> expected: " + expected);
         }
     }
 }

@@ -5,7 +5,7 @@ import fr._42.utils.RpnParser;
 
 public class NegationNormalForm {
 
-    public static String negation_normal_form(String formula) {
+    public static String negationNormalForm(String formula) {
         Expr formulaTree = RpnParser.parseRpn(formula);
         StringBuilder result = new StringBuilder();
         emitNnf(formulaTree, false, result);

@@ -20,7 +20,7 @@ public class SetEvaluationTest {
         );
         List<Integer> expected = List.of(0);
         String formulRpn = "AB&";
-        List<Integer> result = SetEvaluation.eval_set(formulRpn, sets1);
+        List<Integer> result = SetEvaluation.evaluateSet(formulRpn, sets1);
         Collections.sort(result);
         assertEquals(expected, result);
     }
@@ -34,7 +34,7 @@ public class SetEvaluationTest {
         );
         List<Integer> expected = List.of(0, 1, 2, 3, 4, 5);
         String formulRpn = "AB|";
-        List<Integer> result = SetEvaluation.eval_set(formulRpn, sets1);
+        List<Integer> result = SetEvaluation.evaluateSet(formulRpn, sets1);
         Collections.sort(result);
         assertEquals(expected, result);
     }
@@ -47,7 +47,7 @@ public class SetEvaluationTest {
         );
         List<Integer> expected = new ArrayList<>();
         String formulRpn = "A!";
-        List<Integer> result = SetEvaluation.eval_set(formulRpn, sets1);
+        List<Integer> result = SetEvaluation.evaluateSet(formulRpn, sets1);
         Collections.sort(result);
         assertEquals(expected, result);
     }
@@ -61,7 +61,7 @@ public class SetEvaluationTest {
         );
         List<Integer> expected = List.of(2, 3);
         String formulRpn = "A!B|";
-        List<Integer> result = SetEvaluation.eval_set(formulRpn, sets1);
+        List<Integer> result = SetEvaluation.evaluateSet(formulRpn, sets1);
         Collections.sort(result);
         assertEquals(expected, result);
     }
@@ -76,7 +76,7 @@ public class SetEvaluationTest {
         );
         List<Integer> expected = List.of(2, 4, 5);
         String formulRpn = "AB&C|";
-        List<Integer> result = SetEvaluation.eval_set(formulRpn, sets1);
+        List<Integer> result = SetEvaluation.evaluateSet(formulRpn, sets1);
         Collections.sort(result);
         assertEquals(expected, result);
     }
@@ -90,7 +90,7 @@ public class SetEvaluationTest {
         );
         List<Integer> expected = List.of(4, 5);
         String formulRpn = "A!B|";
-        List<Integer> result = SetEvaluation.eval_set(formulRpn, sets1);
+        List<Integer> result = SetEvaluation.evaluateSet(formulRpn, sets1);
         Collections.sort(result);
         assertEquals(expected, result);
     }
@@ -103,7 +103,7 @@ public class SetEvaluationTest {
         );
         List<Integer> expected = List.of(1, 2);
         String formulRpn = "A!!";
-        List<Integer> result = SetEvaluation.eval_set(formulRpn, sets1);
+        List<Integer> result = SetEvaluation.evaluateSet(formulRpn, sets1);
         Collections.sort(result);
         assertEquals(expected, result);
     }

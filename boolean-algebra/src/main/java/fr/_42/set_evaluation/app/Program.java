@@ -1,8 +1,9 @@
 package fr._42.set_evaluation.app;
 
-import fr._42.set_evaluation.logic.SetEvaluation;
 import java.util.Arrays;
 import java.util.List;
+
+import fr._42.set_evaluation.logic.SetEvaluation;
 
 public class Program {
 
@@ -15,7 +16,7 @@ public class Program {
             Arrays.asList(0, 1, 2),
             Arrays.asList(0, 3, 4)
         );
-        List<Integer> result1 = SetEvaluation.eval_set("AB&", sets1);
+        List<Integer> result1 = SetEvaluation.evaluateSet("AB&", sets1);
         System.out.println("Sets: A={0, 1, 2}, B={0, 3, 4}");
         System.out.println("Formula: AB&");
         System.out.println("Result: " + result1);
@@ -27,7 +28,7 @@ public class Program {
             Arrays.asList(0, 1, 2),
             Arrays.asList(3, 4, 5)
         );
-        List<Integer> result2 = SetEvaluation.eval_set("AB|", sets2);
+        List<Integer> result2 = SetEvaluation.evaluateSet("AB|", sets2);
         System.out.println("Sets: A={0, 1, 2}, B={3, 4, 5}");
         System.out.println("Formula: AB|");
         System.out.println("Result: " + result2);
@@ -38,7 +39,7 @@ public class Program {
         List<List<Integer>> sets3 = Arrays.asList(
             Arrays.asList(0, 1, 2)
         );
-        List<Integer> result3 = SetEvaluation.eval_set("A!", sets3);
+        List<Integer> result3 = SetEvaluation.evaluateSet("A!", sets3);
         System.out.println("Sets: A={0, 1, 2}");
         System.out.println("Formula: A!");
         System.out.println("Result: " + result3);
@@ -50,7 +51,7 @@ public class Program {
             Arrays.asList(1, 2),
             Arrays.asList(2, 3)
         );
-        List<Integer> result4 = SetEvaluation.eval_set("A!B|", sets4);
+        List<Integer> result4 = SetEvaluation.evaluateSet("A!B|", sets4);
         System.out.println("Sets: A={1, 2}, B={2, 3}");
         System.out.println("Formula: A!B|");
         System.out.println("Result: " + result4);
@@ -63,7 +64,7 @@ public class Program {
             Arrays.asList(2, 3),
             Arrays.asList(4, 5)
         );
-        List<Integer> result5 = SetEvaluation.eval_set("AB&C|", sets5);
+        List<Integer> result5 = SetEvaluation.evaluateSet("AB&C|", sets5);
         System.out.println("Sets: A={1, 2}, B={2, 3}, C={4, 5}");
         System.out.println("Formula: AB&C|");
         System.out.println("Result: " + result5);
@@ -75,7 +76,7 @@ public class Program {
             Arrays.asList(1, 2, 3),
             Arrays.asList(4, 5)
         );
-        List<Integer> result6 = SetEvaluation.eval_set("A!B|", sets6);
+        List<Integer> result6 = SetEvaluation.evaluateSet("A!B|", sets6);
         System.out.println("Sets: A={1, 2, 3}, B={4, 5}");
         System.out.println("Formula: A!B|");
         System.out.println("Result: " + result6);
@@ -86,7 +87,7 @@ public class Program {
         List<List<Integer>> sets7 = Arrays.asList(
             Arrays.asList(1, 2)
         );
-        List<Integer> result7 = SetEvaluation.eval_set("A!!", sets7);
+        List<Integer> result7 = SetEvaluation.evaluateSet("A!!", sets7);
         System.out.println("Sets: A={1, 2}");
         System.out.println("Formula: A!!");
         System.out.println("Result: " + result7);

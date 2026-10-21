@@ -15,7 +15,7 @@ public class AdderTest {
         int result = Adder.adder(a, b);
 
         // Assert
-        assertEquals(5, result);
+        assertEquals(a + b, result);
     }
 
     @Test
@@ -28,7 +28,7 @@ public class AdderTest {
         int result = Adder.adder(a, b);
 
         // Assert
-        assertEquals(0, result);
+        assertEquals(a + b, result);
     }
 
     @Test
@@ -41,7 +41,7 @@ public class AdderTest {
         int result = Adder.adder(a, b);
 
         // Assert
-        assertEquals(-1, result);
+        assertEquals(a + b, result);
     }
 
     @Test
@@ -54,7 +54,20 @@ public class AdderTest {
         int result = Adder.adder(a, b);
 
         // Assert
-        assertEquals(Integer.MIN_VALUE, result);
+        assertEquals(a + b, result);
+    }
+
+    @Test
+    public void adderWithMinValue(){
+        // Arrange
+        int a = Integer.MIN_VALUE;
+        int b = -1;
+
+        // Act
+        int result = Adder.adder(a, b);
+
+        // Assert
+        assertEquals(a + b, result);
     }
 
     @Test
@@ -67,6 +80,6 @@ public class AdderTest {
         int result = Adder.adder(a, b);
 
         // Assert
-        assertEquals(0, result);
+        assertEquals(a + b, result);
     }
 }

@@ -12,7 +12,7 @@ public class NegationNormalFormTest {
         String formula = "AB&!";
 
         // Act
-        String result = NegationNormalForm.negation_normal_form(formula);
+        String result = NegationNormalForm.negationNormalForm(formula);
 
         // Assert
         assertEquals("A!B!|", result);
@@ -24,7 +24,7 @@ public class NegationNormalFormTest {
         String formula = "AB|!";
 
         // Act
-        String result = NegationNormalForm.negation_normal_form(formula);
+        String result = NegationNormalForm.negationNormalForm(formula);
 
         // Assert
         assertEquals("A!B!&", result);
@@ -36,7 +36,7 @@ public class NegationNormalFormTest {
         String formula = "AB>";
 
         // Act
-        String result = NegationNormalForm.negation_normal_form(formula);
+        String result = NegationNormalForm.negationNormalForm(formula);
 
         // Assert
         assertEquals("A!B|", result);
@@ -48,7 +48,7 @@ public class NegationNormalFormTest {
         String formula = "A!!";
 
         // Act
-        String result = NegationNormalForm.negation_normal_form(formula);
+        String result = NegationNormalForm.negationNormalForm(formula);
 
         // Assert
         assertEquals("A", result);
@@ -60,7 +60,7 @@ public class NegationNormalFormTest {
         String formula = "AB=";
 
         // Act
-        String result = NegationNormalForm.negation_normal_form(formula);
+        String result = NegationNormalForm.negationNormalForm(formula);
 
         // Assert
         assertEquals("AB&A!B!&|", result);
@@ -72,6 +72,6 @@ public class NegationNormalFormTest {
         String invalidFormula = "AB@";
 
         // Act + Assert
-        assertThrows(IllegalArgumentException.class, () -> NegationNormalForm.negation_normal_form(invalidFormula));
+        assertThrows(IllegalArgumentException.class, () -> NegationNormalForm.negationNormalForm(invalidFormula));
     }
 }

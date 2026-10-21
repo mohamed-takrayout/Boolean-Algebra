@@ -15,7 +15,7 @@ public class MultiplierTest {
         int result = Multiplier.multiplier(a, b);
 
         // Assert
-        assertEquals(15, result);
+        assertEquals(a * b, result);
     }
 
     @Test
@@ -31,8 +31,8 @@ public class MultiplierTest {
         int secondResult = Multiplier.multiplier(secondA, secondB);
 
         // Assert
-        assertEquals(-15, firstResult);
-        assertEquals(-15, secondResult);
+        assertEquals(firstA * firstB, firstResult);
+        assertEquals(secondA * secondB, secondResult);
     }
 
     @Test
@@ -45,7 +45,7 @@ public class MultiplierTest {
         int result = Multiplier.multiplier(a, b);
 
         // Assert
-        assertEquals(15, result);
+        assertEquals(a * b, result);
     }
 
     @Test
@@ -58,7 +58,7 @@ public class MultiplierTest {
         int result = Multiplier.multiplier(a, b);
 
         // Assert
-        assertEquals(0, result);
+        assertEquals(a * b, result);
     }
 
     @Test
@@ -72,8 +72,8 @@ public class MultiplierTest {
         int minusOneResult = Multiplier.multiplier(minusOne, 12345);
 
         // Assert
-        assertEquals(12345, oneResult);
-        assertEquals(-12345, minusOneResult);
+        assertEquals(one * 12345, oneResult);
+        assertEquals(minusOne * 12345, minusOneResult);
     }
 
     @Test
@@ -86,6 +86,6 @@ public class MultiplierTest {
         int result = Multiplier.multiplier(a, b);
 
         // Assert
-        assertEquals(-2, result);
+        assertEquals(a * b, result);
     }
 }

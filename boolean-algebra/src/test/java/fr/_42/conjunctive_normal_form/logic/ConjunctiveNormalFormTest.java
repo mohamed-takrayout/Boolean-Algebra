@@ -12,7 +12,7 @@ public class ConjunctiveNormalFormTest {
         String formula = "AB|C&";
 
         // Act
-        String result = ConjunctiveNormalForm.conjunctive_normal_form(formula);
+        String result = ConjunctiveNormalForm.conjunctiveNormalForm(formula);
 
         // Assert
         assertEquals("AB|C&", result);
@@ -24,7 +24,7 @@ public class ConjunctiveNormalFormTest {
         String formula = "AB&!";
 
         // Act
-        String result = ConjunctiveNormalForm.conjunctive_normal_form(formula);
+        String result = ConjunctiveNormalForm.conjunctiveNormalForm(formula);
 
         // Assert
         assertEquals("A!B!|", result);
@@ -36,6 +36,6 @@ public class ConjunctiveNormalFormTest {
         String invalidFormula = "A!B";
 
         // Act + Assert
-        assertThrows(IllegalArgumentException.class, () -> ConjunctiveNormalForm.conjunctive_normal_form(invalidFormula));
+        assertThrows(IllegalArgumentException.class, () -> ConjunctiveNormalForm.conjunctiveNormalForm(invalidFormula));
     }
 }
